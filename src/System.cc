@@ -207,6 +207,7 @@ cv::Mat System::TrackStereo(const cv::Mat &imLeft, const cv::Mat &imRight, const
     mTrackingState = mpTracker->mState;
     mTrackedMapPoints = mpTracker->mCurrentFrame.mvpMapPoints;
     mTrackedKeyPointsUn = mpTracker->mCurrentFrame.mvKeysUn;
+    mTrackedKeyPoints = mpTracker->mCurrentFrame.mvKeys;
 
     return Tcw;
 }
@@ -715,6 +716,12 @@ vector<MapPoint*> System::GetTrackedMapPoints()
 }
 
 vector<cv::KeyPoint> System::GetTrackedKeyPointsUn()
+{
+    unique_lock<mutex> lock(mMutexState);
+    return mTrackedKeyPointsUn;
+}
+
+vector<cv::KeyPoint> System::GetTrackedKeyPoints()
 {
     unique_lock<mutex> lock(mMutexState);
     return mTrackedKeyPointsUn;

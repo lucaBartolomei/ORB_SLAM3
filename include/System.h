@@ -165,6 +165,7 @@ public:
     int GetTrackingState();
     std::vector<MapPoint*> GetTrackedMapPoints();
     std::vector<cv::KeyPoint> GetTrackedKeyPointsUn();
+    std::vector<cv::KeyPoint> GetTrackedKeyPoints();
 
     // For debugging
     double GetTimeFromIMUInit();
@@ -230,7 +231,7 @@ private:
     // Tracking state
     int mTrackingState;
     std::vector<MapPoint*> mTrackedMapPoints;
-    std::vector<cv::KeyPoint> mTrackedKeyPointsUn;
+    std::vector<cv::KeyPoint> mTrackedKeyPointsUn, mTrackedKeyPoints;
     std::mutex mMutexState;
 };
 
